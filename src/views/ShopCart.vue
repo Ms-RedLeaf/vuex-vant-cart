@@ -1,14 +1,12 @@
 <template>
-  <div class="shopcart">{{count}}</div>
+  <div class="shopCart">hgkjklkj</div>
 </template>
 
 <script>
 
-import { mapState } from 'vuex';
+
 export default {
-  name: "shopCart",
-  computed: {
-    ...mapState(['count'])
-  }
+  name: 'shopCart',
+
 };
 </script>

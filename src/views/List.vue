@@ -10,6 +10,8 @@
 
       <button @click="cliakHandle(item)">加入购物车</button>
     </div>
+    <button @click="nextPage()"
+            class="next">下一页</button>
   </div>
 </template>
 <script>
@@ -22,10 +24,11 @@ export default {
   data() {
     return {
       list: [],
+      page: 1,
     };
   },
   created() {
-    this.loadData(5);
+    this.loadData();
   },
   methods: {
     async loadData(page) {
@@ -35,11 +38,12 @@ export default {
       this.page += 1;
     },
     async cliakHandle(item) {
-      console.log(item.id);
-      // const res = await addCart(item.id);
-
+      const res = await addCart(item._id);
+      console.log(res);
     },
-
+    nextPage() {
+      this.loadData(this.page);
+    },
   },
 };
 </script>
@@ -55,6 +59,16 @@ export default {
   border-bottom: 1px solid #ccc;
   div {
     margin-bottom: 10px;
+  }
+}
+.list {
+  position: relative;
+  .next {
+    position: absolute;
+    width: 100px;
+    height: 20px;
+    left: 50%;
+    transform: translate(-50%, 0);
   }
 }
 </style>

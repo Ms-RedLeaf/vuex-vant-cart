@@ -1,6 +1,6 @@
 <template>
   <div class="detail">
-    鸟的挥洒胡
+    详情页
   </div>
 </template>
 <script>

@@ -1,5 +1,5 @@
-import { get, post } from "../utils/request";
+import { get } from '../utils/request';
 
-export function getDetail(id){
-  return get(`/products/${id}`)
+export function getDetail(id) {
+  return get(`/products/${id}`);
 }
