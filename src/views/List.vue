@@ -7,7 +7,6 @@
       <router-link :to="{path: `/detail/${item._id}`}">
         <div>{{item.name}}</div>
       </router-link>
-
       <button @click="cliakHandle(item)">加入购物车</button>
     </div>
     <button @click="nextPage()"
@@ -15,7 +14,7 @@
   </div>
 </template>
 <script>
-import { productsPaged } from '../service/product';
+import productsPaged from '../service/product';
 import { addCart } from '../service/shop_cart';
 
 

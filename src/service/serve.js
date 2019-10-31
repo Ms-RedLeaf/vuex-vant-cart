@@ -1,5 +1,5 @@
 import { get } from '../utils/request';
 
-export function getDetail(id) {
+export default function getDetail(id) {
   return get(`/products/${id}`);
 }

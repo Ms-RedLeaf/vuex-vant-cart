@@ -62,7 +62,14 @@ p {
   box-sizing: border-box;
 }
 
+html {
+  font-size: 26.66vw;
+}
+
 html,
 body {
   height: 100%;
+}
+body {
+  font-size: 0.16rem;
 }

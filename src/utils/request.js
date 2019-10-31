@@ -21,7 +21,7 @@ instance.interceptors.response.use(
     console.dir(error); // eslint-disable-line
     if (error.response.status === 401) {
       // 如果报错401未授权，说明需要token值，就跳转登录页
-      window.location.href = '/user';
+      window.location.href = '#/user';
     }
     return Promise.reject(error);
   },
