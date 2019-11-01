@@ -1,5 +1,9 @@
 <template>
-  <div class="list">
+  <div class="detail">
+    <van-nav-bar title="标题"
+                 left-text="返回"
+                 left-arrow
+                 @click-left="$router.back()" />
     <div class="swiper">
       <img :src="list.coverImg"
            alt />
@@ -136,6 +140,14 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.detail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: #fff;
+}
 .footer {
   color: #333333;
   margin-top: 50px;

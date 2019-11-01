@@ -1,5 +1,5 @@
 <template>
-  <div class="shopCart">hgkjklkj</div>
+  <div class="shop-cart">hgkjklkj</div>
 </template>
 
 <script>
@@ -7,6 +7,10 @@
 
 export default {
   name: 'shopCart',
-
 };
 </script>
+<style lang="scss" scoped>
+.shop-cart {
+  position: absolute;
+}
+</style>

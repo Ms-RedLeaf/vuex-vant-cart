@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+
     <div></div>
     <div id="nav">
       <van-sticky>
@@ -20,9 +21,11 @@
         </van-tabs>
       </van-sticky>
     </div>
-
-    <router-view />
-
+    <transition name="component-fade">
+      <keep-alive>
+        <router-view />
+      </keep-alive>
+    </transition>
   </div>
 </template>
 <script>
@@ -47,5 +50,17 @@ export default {
   #nav {
     margin: 0 auto;
   }
+}
+.component-fade-enter-active,
+.component-fade-leave-active {
+  transition: all 0.3s ease;
+}
+.component-fade-enter {
+  opacity: 0;
+  transform: translateX(370px);
+}
+.component-fade-leave-to {
+  opacity: 0;
+  transform: translateX(-370px);
 }
 </style>
