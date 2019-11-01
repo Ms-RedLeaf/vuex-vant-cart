@@ -1,16 +1,32 @@
 /* eslint-disable vue/valid-v-bind */
 <template>
-  <div class="list">
-    <div class="listItem"
+  <div>
+    <div class="list"
          v-for="item in list"
          :key="item.id">
-      <router-link :to="{path: `/detail/${item._id}`}">
-        <div>{{item.name}}</div>
-      </router-link>
-      <button @click="cliakHandle(item)">加入购物车</button>
+
+      <van-card :price="item.price"
+                :desc="item.descriptions"
+                :title="item.name"
+                :thumb="item.coverImg"
+                @click="toDetail(item._id)">
+
+        <div slot="num">
+          库存：{{item.quantity}}
+        </div>
+        <div slot="footer">
+          <van-button size="mini"
+                      @click="cliakHandle(item)">加入购物车</van-button>
+        </div>
+      </van-card>
     </div>
-    <button @click="nextPage()"
-            class="next">下一页</button>
+    <van-pagination v-model="currentPage"
+                    :total-items="125"
+                    mode="simple"
+                    :show-page-size="5"
+                    force-ellipses
+                    :page-count='totalPage'
+                    @change='nextPage' />
   </div>
 </template>
 <script>
@@ -23,25 +39,31 @@ export default {
   data() {
     return {
       list: [],
-      page: 1,
+      currentPage: 1,
+      totalPage: 0,
+
     };
   },
   created() {
     this.loadData();
   },
   methods: {
-    async loadData(page) {
-      const res = await productsPaged(page);
-
+    toDetail(id) {
+      this.$router.push({
+        path: `/detail/${id}`,
+      });
+    },
+    async loadData() {
+      const res = await productsPaged(this.currentPage);
+      this.totalPage = res.data.pages;
       this.list = res.data.products;
-      this.page += 1;
     },
     async cliakHandle(item) {
       const res = await addCart(item._id);
       console.log(res);
     },
     nextPage() {
-      this.loadData(this.page);
+      this.loadData();
     },
   },
 };
@@ -69,5 +91,8 @@ export default {
     left: 50%;
     transform: translate(-50%, 0);
   }
+}
+.van-card__num {
+  color: pink;
 }
 </style>
