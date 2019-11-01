@@ -8,15 +8,21 @@
       <van-card :price="item.price"
                 :desc="item.descriptions"
                 :title="item.name"
-                :thumb="item.coverImg"
+                :thumb="item.coverImg?item.coverImg:defaltImg"
                 @click="toDetail(item._id)">
 
         <div slot="num">
-          库存：{{item.quantity}}
+          库存：<span class="stock">{{item.quantity}}</span>
         </div>
         <div slot="footer">
-          <van-button size="mini"
-                      @click="cliakHandle(item)">加入购物车</van-button>
+
+          <van-button round
+                      size="mini"
+                      color="linear-gradient(to right, rgb(68, 243, 228), rgb(52, 200, 245))"
+                      @click="cliakHandle(item)"
+                      class="add-shop">
+            <van-icon name="shopping-cart-o" />
+          </van-button>
         </div>
       </van-card>
     </div>
@@ -41,7 +47,7 @@ export default {
       list: [],
       currentPage: 1,
       totalPage: 0,
-
+      defaltImg: 'https://img.yzcdn.cn/vant/cat.jpeg',
     };
   },
   created() {
@@ -69,30 +75,18 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.listItem {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 10px;
-  height: 60px;
-  border-bottom: 1px solid #ccc;
-  div {
-    margin-bottom: 10px;
-  }
-}
 .list {
-  position: relative;
-  .next {
-    position: absolute;
-    width: 100px;
-    height: 20px;
-    left: 50%;
-    transform: translate(-50%, 0);
-  }
+  margin-bottom: 10px;
 }
 .van-card__num {
-  color: pink;
+  color: #aaa;
+  .stock {
+    vertical-align: middle;
+  }
+}
+.add-shop {
+  position: absolute;
+  bottom: 6px;
+  right: 16px;
 }
 </style>
