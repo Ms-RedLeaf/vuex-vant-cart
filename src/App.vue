@@ -38,7 +38,7 @@ export default {
   },
   watch: {
     $route(to, from) {
-      console.log(to, from);
+      // console.log(to, from);
       this.active = to.name;
     },
   },

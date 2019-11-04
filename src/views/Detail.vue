@@ -1,10 +1,12 @@
 <template>
   <div class="detail">
-    <van-nav-bar title="标题"
+    <van-nav-bar title="详情"
                  left-text="返回"
                  left-arrow
                  @click-left="$router.back()" />
     <div class="swiper">
+      <div class="loading"
+           v-show="isloading">loading</div>
       <img :src="list.coverImg"
            alt />
       <p>{{list.name}}</p>
@@ -106,6 +108,7 @@
                                text="店铺" />
         <van-goods-action-button color="#CD8829"
                                  type="warning"
+                                 @click="cliakHandle(list)"
                                  text="加入购物车" />
         <van-goods-action-button color="#333"
                                  type="danger"
@@ -116,6 +119,7 @@
 </template>
 <script>
 import getDetail from '../service/serve';
+import { addCart } from '../service/shop_cart';
 
 export default {
   name: 'detail',
@@ -124,18 +128,38 @@ export default {
       isShow: true,
       id: this.$route.params.id,
       navTu: '',
-      list: [],
+      list: {},
+      isloading: false,
+
     };
   },
   created() {
     this.loadData();
   },
   methods: {
-    async loadData() {
+    async cliakHandle(item) {
+      const res = await addCart(item._id);
+      console.log(res);
+    },
+    async  loadData() {
       const res = await getDetail(this.id);
       console.log(res.data);
       this.list = res.data;
+      this.isloading = false;
     },
+  },
+  // 监听路由id的转变，id变化，就重新请求一次数据
+  watch: {
+    id() {
+      this.isloading = true;
+      this.list = { coverImg: '' };
+      this.loadData();
+    },
+  },
+  // 组件重新被激活
+  activated() {
+    this.id = this.$route.params.id;
+    this.loadData();
   },
 };
 </script>
@@ -159,6 +183,12 @@ export default {
     display: block;
     height: 3.27rem;
     width: 100%;
+  }
+  .loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
   p {
     margin: 0.05rem 0 0.17rem;

@@ -8,3 +8,10 @@ export function login(user) {
 export function reg(user) {
   return post('/auth/reg', user);
 }
+
+export function isLogin() {
+  if (localStorage.getItem('token')) {
+    return true;
+  }
+  return false;
+}

@@ -15,11 +15,11 @@
           库存：<span class="stock">{{item.quantity}}</span>
         </div>
         <div slot="footer">
-
+          <!-- click.stop事件修饰符，阻止单击事件继续传播 -->
           <van-button round
                       size="mini"
                       color="linear-gradient(to right, rgb(68, 243, 228), rgb(52, 200, 245))"
-                      @click="cliakHandle(item)"
+                      @click.stop="cliakHandle(item)"
                       class="add-shop">
             <van-icon name="shopping-cart-o" />
           </van-button>
@@ -38,6 +38,7 @@
 <script>
 import productsPaged from '../service/product';
 import { addCart } from '../service/shop_cart';
+import { setCart } from "../utils/tools";
 
 
 export default {
@@ -66,6 +67,7 @@ export default {
     },
     async cliakHandle(item) {
       const res = await addCart(item._id);
+      setCart(item._id);
       console.log(res);
     },
     nextPage() {
