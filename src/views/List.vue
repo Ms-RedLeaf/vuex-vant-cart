@@ -15,7 +15,7 @@
           库存：<span class="stock">{{item.quantity}}</span>
         </div>
         <div slot="footer">
-          <!-- click.stop事件修饰符，阻止单击事件继续传播 -->
+          <!-- click.stop事件修饰符，阻止单击事件继续传播，点按钮的时候，不点到大div -->
           <van-button round
                       size="mini"
                       color="linear-gradient(to right, rgb(68, 243, 228), rgb(52, 200, 245))"
